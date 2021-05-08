@@ -11,12 +11,12 @@ export default cron.schedule('*/10 * * * * *', async () => {
       fsyms: 'BTC,LINK,MKR,USD,EUR,ETH,LTC',
       tsyms: 'BTC,LINK,MKR,USD,EUR,ETH,LTC',
     };
-    const response = await axios.get(
+    const apiResponse = await axios.get(
       `${API_URL}?fsyms=${query.fsyms}&tsyms=${query.tsyms}`
     );
-    const { raws, displays } = dataSimplify(response.data, query);
+    const { raws, displays } = dataSimplify(apiResponse.data, query);
     await queries.saveData(raws, displays);
-    console.log('DB UPDATED');
+    console.log('SCHEDULER RAN');
   } catch (error) {
     console.log('\n\nERROR ========>', error, '\n\n');
     return error;
