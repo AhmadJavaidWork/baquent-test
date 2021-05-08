@@ -1,6 +1,6 @@
 import queries from './queries';
 import axios from 'axios';
-import { dataSimplify, makeRes, formatQuery } from './herlper';
+import { dataSimplify, makeRes, formatQuery, paramError } from './herlper';
 
 const API_URL = process.env.API_URL;
 
@@ -10,12 +10,7 @@ export const apiCall = async (req, res, done) => {
     const apiResponse = await axios.get(
       `${API_URL}?fsyms=${query.fsyms}&tsyms=${query.tsyms}`
     );
-    if (
-      apiResponse.data.Response === 'Error' &&
-      (apiResponse.data.Type === 1 || apiResponse.data.Type === 2)
-    ) {
-      return res.send(apiResponse.data);
-    }
+    if (paramError(apiResponse)) return res.send(apiResponse.data);
     req.apiResponse = apiResponse;
     req.query = query;
     done();

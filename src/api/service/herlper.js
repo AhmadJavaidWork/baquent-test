@@ -78,6 +78,15 @@ export const formatQuery = (query) => {
   return query;
 };
 
+export const paramError = (apiResponse) => {
+  if (
+    apiResponse.data.Response === 'Error' &&
+    (apiResponse.data.Type === 1 || apiResponse.data.Type === 2)
+  ) {
+    return true;
+  }
+};
+
 const removeExtraFields = (data) => {
   if (data.fsym) delete data.fsym;
   if (data.tsym) delete data.tsym;
