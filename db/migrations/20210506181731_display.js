@@ -12,6 +12,8 @@ exports.up = async (knex) => {
     table.text('LOW24HOUR');
     table.text('HIGH24HOUR');
     table.text('PRICE');
+    table.text('FROMSYMBOL');
+    table.text('TOSYMBOL');
     table.text('LASTUPDATE');
     table.text('SUPPLY');
     table.text('MKTCAP');

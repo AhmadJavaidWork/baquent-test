@@ -5,38 +5,20 @@ export const dataSimplify = (data, query) => {
   const displays = [];
   fsyms.forEach((fsym) => {
     tsyms.forEach((tsym) => {
-      const raw = {
-        fsym: data.RAW[fsym][tsym].FROMSYMBOL,
-        tsym: data.RAW[fsym][tsym].TOSYMBOL,
-        CHANGE24HOUR: data.RAW[fsym][tsym].CHANGE24HOUR,
-        CHANGEPCT24HOUR: data.RAW[fsym][tsym].CHANGEPCT24HOUR,
-        OPEN24HOUR: data.RAW[fsym][tsym].OPEN24HOUR,
-        VOLUME24HOUR: data.RAW[fsym][tsym].VOLUME24HOUR,
-        VOLUME24HOURTO: data.RAW[fsym][tsym].VOLUME24HOURTO,
-        LOW24HOUR: data.RAW[fsym][tsym].LOW24HOUR,
-        HIGH24HOUR: data.RAW[fsym][tsym].HIGH24HOUR,
-        PRICE: data.RAW[fsym][tsym].PRICE,
-        LASTUPDATE: data.RAW[fsym][tsym].LASTUPDATE,
-        SUPPLY: data.RAW[fsym][tsym].SUPPLY,
-        MKTCAP: data.RAW[fsym][tsym].MKTCAP,
-      };
-      const display = {
-        fsym: data.RAW[fsym][tsym].FROMSYMBOL,
-        tsym: data.RAW[fsym][tsym].TOSYMBOL,
-        CHANGE24HOUR: data.DISPLAY[fsym][tsym].CHANGE24HOUR,
-        CHANGEPCT24HOUR: data.DISPLAY[fsym][tsym].CHANGEPCT24HOUR,
-        OPEN24HOUR: data.DISPLAY[fsym][tsym].OPEN24HOUR,
-        VOLUME24HOUR: data.DISPLAY[fsym][tsym].VOLUME24HOUR,
-        VOLUME24HOURTO: data.DISPLAY[fsym][tsym].VOLUME24HOURTO,
-        LOW24HOUR: data.DISPLAY[fsym][tsym].LOW24HOUR,
-        HIGH24HOUR: data.DISPLAY[fsym][tsym].HIGH24HOUR,
-        PRICE: data.DISPLAY[fsym][tsym].PRICE,
-        LASTUPDATE: data.DISPLAY[fsym][tsym].LASTUPDATE,
-        SUPPLY: data.DISPLAY[fsym][tsym].SUPPLY,
-        MKTCAP: data.DISPLAY[fsym][tsym].MKTCAP,
-      };
-      raws.push(raw);
-      displays.push(display);
+      if (
+        data.RAW[fsym] &&
+        data.RAW[fsym][tsym] &&
+        data.RAW[fsym][tsym].FROMSYMBOL &&
+        data.RAW[fsym][tsym].TOSYMBOL
+      ) {
+        const raw = rawStruct(data.RAW[fsym][tsym]);
+        const display = displayStruct(
+          data.RAW[fsym][tsym],
+          data.DISPLAY[fsym][tsym]
+        );
+        raws.push(raw);
+        displays.push(display);
+      }
     });
   });
   return { raws, displays };
@@ -94,4 +76,42 @@ const removeExtraFields = (data) => {
   if (data.updated_at) delete data.updated_at;
   if (data.created_at) delete data.created_at;
   return data;
+};
+
+const rawStruct = (raw) => {
+  return {
+    fsym: raw.FROMSYMBOL,
+    tsym: raw.TOSYMBOL,
+    CHANGE24HOUR: raw.CHANGE24HOUR,
+    CHANGEPCT24HOUR: raw.CHANGEPCT24HOUR,
+    OPEN24HOUR: raw.OPEN24HOUR,
+    VOLUME24HOUR: raw.VOLUME24HOUR,
+    VOLUME24HOURTO: raw.VOLUME24HOURTO,
+    LOW24HOUR: raw.LOW24HOUR,
+    HIGH24HOUR: raw.HIGH24HOUR,
+    PRICE: raw.PRICE,
+    LASTUPDATE: raw.LASTUPDATE,
+    SUPPLY: raw.SUPPLY,
+    MKTCAP: raw.MKTCAP,
+  };
+};
+
+const displayStruct = (raw, display) => {
+  return {
+    fsym: raw.FROMSYMBOL,
+    tsym: raw.TOSYMBOL,
+    CHANGE24HOUR: display.CHANGE24HOUR,
+    CHANGEPCT24HOUR: display.CHANGEPCT24HOUR,
+    OPEN24HOUR: display.OPEN24HOUR,
+    VOLUME24HOUR: display.VOLUME24HOUR,
+    VOLUME24HOURTO: display.VOLUME24HOURTO,
+    LOW24HOUR: display.LOW24HOUR,
+    HIGH24HOUR: display.HIGH24HOUR,
+    PRICE: display.PRICE,
+    FROMSYMBOL: display.FROMSYMBOL,
+    TOSYMBOL: display.TOSYMBOL,
+    LASTUPDATE: display.LASTUPDATE,
+    SUPPLY: display.SUPPLY,
+    MKTCAP: display.MKTCAP,
+  };
 };
