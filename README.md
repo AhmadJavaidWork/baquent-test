@@ -3,7 +3,7 @@
 ## Pre-requisites
 
 1. Postgresql.
-2. Node.
+2. Node.js.
 
 ## Local Setup
 
@@ -16,7 +16,7 @@
    ```
 4. make a development.env file and define the variables as described in .env.example
 5. ```bash
-   npm run dev # run the API in development mode
+   npm run dev # run the Server in development mode
    ```
 
 ## Directory structure
@@ -72,11 +72,3 @@ This is where the helper functions are defined to be used in the respective cont
 ### src/services/
 
 Here you can put `helpers`, `libraries` and other types of modules which you want to use in your APIs.
-
-```
-
-```
-
-```
-
-```
