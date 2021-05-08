@@ -17,7 +17,7 @@
 4. ```bash
    npx knex migrate:latest --knexfile src/services/knex/knexConfig.js # runs the migrations for db
    ```
-5. make a development.env file and define the variables as described in .env.example
+5. make a development.env file in the root folder and define the variables as described in .env.example
 6. ```bash
    npm run dev # run the Server in development mode
    ```
