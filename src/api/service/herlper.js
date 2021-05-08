@@ -72,6 +72,12 @@ export const makeRes = (raws, displays, query) => {
   return res;
 };
 
+export const formatQuery = (query) => {
+  if (query.fsyms) query.fsyms = query.fsyms.toUpperCase();
+  if (query.tsyms) query.tsyms = query.tsyms.toUpperCase();
+  return query;
+};
+
 const removeExtraFields = (data) => {
   if (data.fsym) delete data.fsym;
   if (data.tsym) delete data.tsym;

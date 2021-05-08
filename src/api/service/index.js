@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { getPrice } from './controller';
+import { getPrice, apiCall } from './controller';
 
 const router = new Router();
 
-router.get('/price', getPrice);
+router.get('/price', apiCall, getPrice);
 
 export default router;
