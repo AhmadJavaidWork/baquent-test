@@ -11,18 +11,13 @@
 2. ```bash
    cd baquent-test # change directory into the cloned respository
    ```
-
-````
 3. ```bash
-npm i # installs all required dependencies
-```
-
+   npm i # installs all required dependencies
+   ```
 4. make a development.env file and define the variables as described in .env.example
 5. ```bash
    npm run dev # run the API in development mode
    ```
-
-```
 
 ## Directory structure
 
@@ -77,5 +72,11 @@ This is where the helper functions are defined to be used in the respective cont
 ### src/services/
 
 Here you can put `helpers`, `libraries` and other types of modules which you want to use in your APIs.
+
 ```
-````
+
+```
+
+```
+
+```
