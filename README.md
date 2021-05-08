@@ -79,8 +79,8 @@ Here you can put `helpers`, `libraries` and other types of modules which you wan
 
 #### src/services/scheduler
 
-The scheduler is defined in this file
+The scheduler is defined in this file.
 
 #### src/services/websocker
 
-The web socket is defined in this file
+The web socket is defined in this file.
