@@ -26,6 +26,7 @@ const saveData = async (raws, displays) => {
 const getDataFromDB = async (query) => {
   const fsyms = query.fsyms.split(',');
   const tsyms = query.tsyms.split(',');
+  console.log(fsyms, tsyms);
   const rawPromise = getRaws(fsyms, tsyms);
   const displayPromise = getDisplays(fsyms, tsyms);
   const data = await Promise.all([rawPromise, displayPromise]);

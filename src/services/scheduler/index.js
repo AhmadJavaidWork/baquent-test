@@ -18,13 +18,15 @@ export default cron.schedule('*/10 * * * * *', async () => {
     const apiResponse = await axios.get(
       `${API_URL}?fsyms=${query.fsyms}&tsyms=${query.tsyms}`
     );
-    const { raws, displays } = dataSimplify(apiResponse.data, query);
-    await queries.saveData(raws, displays);
-    console.log('SCHEDULER RAN');
-    tsymsIndex++;
-    if (tsymsIndex === tsymsArray.length + 1) tsymsIndex = 0;
-    if (tsymsIndex === 0) fsymsIndex++;
-    if (fsymsIndex === fsymsArray.length + 1) fsymsIndex = 0;
+    if (apiResponse.data.Response !== 'Error') {
+      const { raws, displays } = dataSimplify(apiResponse.data, query);
+      await queries.saveData(raws, displays);
+      console.log('SCHEDULER RAN');
+      tsymsIndex++;
+      if (tsymsIndex === tsymsArray.length) tsymsIndex = 0;
+      if (tsymsIndex === 0) fsymsIndex++;
+      if (fsymsIndex === fsymsArray.length) fsymsIndex = 0;
+    }
   } catch (error) {
     console.log('\n\nERROR ========>', error, '\n\n');
     return error;
