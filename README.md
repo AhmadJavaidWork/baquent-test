@@ -14,8 +14,11 @@
 3. ```bash
    npm i # installs all required dependencies
    ```
-4. make a development.env file and define the variables as described in .env.example
-5. ```bash
+4. ```bash
+   npx knex migrate:latest --knexfile src/services/knex/knexConfig.js # runs the migrations for db
+   ```
+5. make a development.env file and define the variables as described in .env.example
+6. ```bash
    npm run dev # run the Server in development mode
    ```
 
@@ -38,6 +41,7 @@ src/
 ├─ services/
 │ ├─ express/
 │ ├─ knex/
+| ├─ scheduler/
 │ └─ websocket/
 ├─ app.js
 ├─ config.js
@@ -72,3 +76,11 @@ This is where the helper functions are defined to be used in the respective cont
 ### src/services/
 
 Here you can put `helpers`, `libraries` and other types of modules which you want to use in your APIs.
+
+#### src/services/scheduler
+
+The scheduler is defined in this file
+
+#### src/services/websocker
+
+The web socket is defined in this file
